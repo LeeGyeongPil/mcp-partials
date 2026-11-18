@@ -1,0 +1,82 @@
+{
+  "name": "mcp-partials",
+  "version": "0.1.0",
+  "description": "Ordered, de-duplicated partial results for MCP tools on top of spec progress notifications. Works with the official TypeScript SDK v1 and v2, falls back to the final result when chunks cannot be delivered.",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "streaming",
+    "partial-results",
+    "progress",
+    "async-generator",
+    "tools"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeeGyeongPil/mcp-partials.git"
+  },
+  "homepage": "https://github.com/LeeGyeongPil/mcp-partials#readme",
+  "bugs": {
+    "url": "https://github.com/LeeGyeongPil/mcp-partials/issues"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./testing": {
+      "types": "./dist/testing/index.d.ts",
+      "import": "./dist/testing/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "README.ko.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "build:test": "tsc -p tsconfig.test.json",
+    "pretest": "npm run build && npm run build:test",
+    "test": "node --test --test-concurrency=4 build-test/test/*.test.js",
+    "example": "npm run build --silent && npm run build:test --silent && node build-test/examples/slow-grep.js",
+    "example:fallback": "npm run build --silent && npm run build:test --silent && node build-test/examples/fallback-http.js",
+    "example:chaos": "npm run build --silent && npm run build:test --silent && node build-test/examples/chaos.js",
+    "prepack": "npm run build"
+  },
+  "peerDependencies": {
+    "@modelcontextprotocol/client": "^2.4.0",
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "@modelcontextprotocol/server": "^2.4.0"
+  },
+  "peerDependenciesMeta": {
+    "@modelcontextprotocol/client": {
+      "optional": true
+    },
+    "@modelcontextprotocol/sdk": {
+      "optional": true
+    },
+    "@modelcontextprotocol/server": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "2.4.0",
+    "@modelcontextprotocol/core": "2.4.0",
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "@modelcontextprotocol/server": "2.4.0",
+    "@types/node": "20.19.43",
+    "typescript": "6.0.3",
+    "zod": "4.6.7"
+  }
+}
